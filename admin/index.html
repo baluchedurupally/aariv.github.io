@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin • Aariv</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Nunito', sans-serif; background: #f8f9ff; }
+    .title-font { font-family: 'Bubblegum Sans', cursive; }
+    .card { background: white; border-radius: 16px; box-shadow: 0 10px 25px -15px rgba(0,0,0,.2); }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="title-font text-4xl text-purple-600">Admin Dashboard</h1>
+        <p class="text-gray-600">Manage Aariv’s milestones, gallery, journal and guestbook.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/index.html" class="px-4 py-2 rounded-full bg-white shadow text-purple-600 hover:shadow-md">← Back to Site</a>
+        <button id="logoutBtn" class="px-4 py-2 rounded-full bg-slate-900 text-white hover:bg-slate-800">Logout</button>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div id="status" class="card p-4 mb-6">Checking admin access…</div>
+
+    <!-- Main -->
+    <div id="adminRoot" class="hidden">
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        <button class="tabBtn px-4 py-2 rounded-full bg-purple-600 text-white" data-tab="milestones">Milestones</button>
+        <button class="tabBtn px-4 py-2 rounded-full bg-white shadow text-purple-600" data-tab="photos">Gallery</button>
+        <button class="tabBtn px-4 py-2 rounded-full bg-white shadow text-purple-600" data-tab="journal">Journal</button>
+        <button class="tabBtn px-4 py-2 rounded-full bg-white shadow text-purple-600" data-tab="guestbook">Guestbook</button>
+        <button class="tabBtn px-4 py-2 rounded-full bg-white shadow text-purple-600" data-tab="members">Members</button>
+      </div>
+
+      <!-- Milestones -->
+      <section id="tab-milestones" class="tabPane grid gap-6">
+        <div class="card p-6">
+          <h2 class="title-font text-2xl text-green-600 mb-4">Add Milestone</h2>
+
+          <form id="milestoneForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input id="ms_title" class="px-4 py-3 rounded-lg border" placeholder="Title (e.g., First Steps)" required />
+            <input id="ms_date" type="date" class="px-4 py-3 rounded-lg border" required />
+            <input id="ms_tags" class="px-4 py-3 rounded-lg border md:col-span-2" placeholder="Tags (comma separated) e.g., first steps, walking" />
+            <input id="ms_media" class="px-4 py-3 rounded-lg border md:col-span-2"
+                placeholder="Media URLs (comma separated) - optional" />
+            <textarea id="ms_desc" class="px-4 py-3 rounded-lg border md:col-span-2" rows="4" placeholder="Description"></textarea>
+
+            <select id="ms_visibility" class="px-4 py-3 rounded-lg border">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+
+            <button class="px-5 py-3 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700">
+              Save Milestone
+            </button>
+          </form>
+          <p id="ms_msg" class="text-sm text-gray-600 mt-3"></p>
+        </div>
+
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="title-font text-xl text-green-600">Latest Milestones</h3>
+            <button id="refreshMilestones" class="px-4 py-2 rounded-full bg-white shadow text-green-700">Refresh</button>
+          </div>
+          <div id="milestoneList" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="tab-photos" class="tabPane hidden grid gap-6">
+        <div class="card p-6">
+          <h2 class="title-font text-2xl text-yellow-600 mb-4">Upload Photo</h2>
+
+          <form id="photoForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input id="ph_caption" class="px-4 py-3 rounded-lg border md:col-span-2" placeholder="Caption" required />
+            <!-- Album -->
+            <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Select Album</label>
+                    <select id="ph_album_id" class="w-full px-4 py-3 rounded-lg border">
+                    <option value="">(No album)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Or Create New Album</label>
+                    <input id="ph_new_album" class="w-full px-4 py-3 rounded-lg border" placeholder="e.g., 1st Birthday / Month 12" />
+                </div>
+            </div>
+            <input id="ph_taken_at" type="date" class="px-4 py-3 rounded-lg border" />
+            <input id="ph_location" class="px-4 py-3 rounded-lg border" placeholder="Location (optional)" />
+            <input id="ph_tags" class="px-4 py-3 rounded-lg border" placeholder="Tags (comma separated)" />
+
+            <select id="ph_visibility" class="px-4 py-3 rounded-lg border">
+              <option value="private">Private (invite-only)</option>
+              <option value="public">Public</option>
+            </select>
+
+            <input id="ph_file" type="file" accept="image/*" class="px-4 py-3 rounded-lg border md:col-span-2" required />
+
+            <button class="px-5 py-3 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 md:col-span-2">
+              Upload & Save
+            </button>
+          </form>
+          <p id="ph_msg" class="text-sm text-gray-600 mt-3"></p>
+        </div>
+
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="title-font text-xl text-yellow-600">Latest Photos</h3>
+            <button id="refreshPhotos" class="px-4 py-2 rounded-full bg-white shadow text-yellow-700">Refresh</button>
+          </div>
+          <div id="photoList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+      </section>
+
+      <!-- Journal -->
+      <section id="tab-journal" class="tabPane hidden grid gap-6">
+        <div class="card p-6">
+          <h2 class="title-font text-2xl text-red-600 mb-4">Add Journal Entry</h2>
+
+          <form id="journalForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input id="jr_title" class="px-4 py-3 rounded-lg border md:col-span-2" placeholder="Title" required />
+
+            <input id="jr_entry_date" type="date" class="px-4 py-3 rounded-lg border" required />
+
+            <select id="jr_visibility" class="px-4 py-3 rounded-lg border">
+            <option value="private">Private (invite-only)</option>
+            <option value="public">Public</option>
+            </select>
+
+            <input id="jr_mood" class="px-4 py-3 rounded-lg border" placeholder="Mood (optional) e.g., Happy / Sleepy" />
+
+            <input id="jr_tags" class="px-4 py-3 rounded-lg border" placeholder="Tags (comma separated)" />
+
+            <select id="jr_status" class="px-4 py-3 rounded-lg border md:col-span-2">
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+            <option value="scheduled">Scheduled</option>
+            </select>
+
+            <div class="md:col-span-2">
+            <label class="block text-gray-700 font-medium mb-2">Publish At (only for Scheduled)</label>
+            <input id="jr_publish_at" type="da
+            tetime-local" class="w-full px-4 py-3 rounded-lg border" />
+            </div>
+
+            <textarea id="jr_content_html" class="px-4 py-3 rounded-lg border md:col-span-2" rows="7"
+            placeholder="Write content (HTML supported). For now you can paste rich text HTML or plain text." required></textarea>
+
+            <input id="jr_attachments" class="px-4 py-3 rounded-lg border md:col-span-2"
+            placeholder="Attachments URLs (comma separated) - optional" />
+
+            <button class="px-5 py-3 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 md:col-span-2">
+            Save Entry
+            </button>
+
+          </form>
+          <p id="jr_msg" class="text-sm text-gray-600 mt-3"></p>
+        </div>
+
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="title-font text-xl text-red-600">Latest Journal Entries</h3>
+            <button id="refreshJournal" class="px-4 py-2 rounded-full bg-white shadow text-red-700">Refresh</button>
+          </div>
+          <div id="journalList" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- Guestbook -->
+      <section id="tab-guestbook" class="tabPane hidden grid gap-6">
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="title-font text-2xl text-pink-600">Guestbook Moderation</h2>
+            <button id="refreshGuestbook" class="px-4 py-2 rounded-full bg-white shadow text-pink-700">Refresh</button>
+          </div>
+          <div id="guestbookList" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- Members -->
+      <section id="tab-members" class="tabPane hidden grid gap-6">
+        <div class="card p-6">
+          <h2 class="title-font text-2xl text-blue-600 mb-4">Members (Invite-only)</h2>
+          <p class="text-gray-600 mb-4">
+            Members can view private Gallery/Journal after they log in once. You then add their user_id in Supabase.
+          </p>
+
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="title-font text-xl text-blue-600">Current Members</h3>
+            <button id="refreshMembers" class="px-4 py-2 rounded-full bg-white shadow text-blue-700">Refresh</button>
+          </div>
+
+          <div id="membersList" class="space-y-2"></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabaseClient.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aariv Mahadev Chedurupally's personal website. A digital scrapbook of his early years, milestones, and memories.">
+
+  <title>Aariv Mahadev - Aariv's Little World</title>
+  <link rel="icon" type="image/png" href="/assets/my-favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/my-favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/assets/my-favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/my-favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Aariv Mahadev" />
+  <link rel="manifest" href="/assets/my-favicon/site.webmanifest" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Nunito', sans-serif; background-color: #f8f9ff; overflow-x: hidden; }
+    .title-font { font-family: 'Bubblegum Sans', cursive; }
+    .cloud { animation: float 8s ease-in-out infinite; position: absolute; z-index: 0; }
+    .star { animation: twinkle 3s ease-in-out infinite; position: absolute; z-index: 0; }
+    @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-20px)} 100%{transform:translateY(0)} }
+    @keyframes twinkle { 0%{opacity:.3} 50%{opacity:1} 100%{opacity:.3} }
+    .timeline-item::before { content:''; position:absolute; width:20px; height:20px; border-radius:50%; background-color:#fcd5ce; left:-10px; top:50%; transform:translateY(-50%); border:3px solid #f8edeb; }
+    .milestone-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04); }
+    .photo-frame { border: 10px solid white; box-shadow: 0 4px 6px rgba(0,0,0,.1); }
+    .photo-frame::before { content:''; position:absolute; top:-5px; left:50%; transform:translateX(-50%); width:30px; height:15px; background-color:#fcd5ce; border-radius:5px; }
+    .nav-item { transition: all .3s ease; }
+    .nav-item:hover { transform: scale(1.1); }
+    .section { scroll-margin-top: 80px; }
+    /* Milestone header strip */
+    .milestone-header {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white bg-opacity-90 shadow-md z-50 py-3">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <svg class="w-8 h-8 text-pink-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd"></path>
+        </svg>
+        <span class="title-font text-xl ml-2 text-pink-500">Aariv's Little World</span>
+      </div>
+
+      <div class="hidden md:flex space-x-6">
+        <a href="#home" class="nav-item title-font text-purple-500 hover:text-purple-700">Home</a>
+        <a href="#about" class="nav-item title-font text-blue-400 hover:text-blue-600">About Me</a>
+        <a href="#milestones" class="nav-item title-font text-green-400 hover:text-green-600">Milestones</a>
+        <a href="#gallery" class="nav-item title-font text-yellow-500 hover:text-yellow-600">Gallery</a>
+        <a href="#journal" class="nav-item title-font text-red-400 hover:text-red-600">Journal</a>
+        <a href="#guestbook" class="nav-item title-font text-pink-400 hover:text-pink-600">Guestbook</a>
+      </div>
+
+      <button class="md:hidden text-gray-600 focus:outline-none" id="menu-toggle">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="md:hidden hidden bg-white w-full py-3 px-4 shadow-inner" id="mobile-menu">
+      <div class="flex flex-col space-y-3">
+        <a href="#home" class="title-font text-purple-500 hover:text-purple-700">Home</a>
+        <a href="#about" class="title-font text-blue-400 hover:text-blue-600">About Me</a>
+        <a href="#milestones" class="title-font text-green-400 hover:text-green-600">Milestones</a>
+        <a href="#gallery" class="title-font text-yellow-500 hover:text-yellow-600">Gallery</a>
+        <a href="#journal" class="title-font text-red-400 hover:text-red-600">Journal</a>
+        <a href="#guestbook" class="title-font text-pink-400 hover:text-pink-600">Guestbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="section min-h-screen pt-24 pb-16 relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="cloud text-blue-200" style="top: 15%; left: 5%;">
+      <svg class="w-24 h-16" viewBox="0 0 100 60" fill="currentColor">
+        <path d="M10,40 Q15,20 40,30 Q60,0 80,30 Q95,25 90,40 Q100,55 80,50 Q65,70 50,50 Q35,60 20,50 Q5,55 10,40 Z"></path>
+      </svg>
+    </div>
+    <div class="cloud text-blue-100" style="top: 30%; right: 10%;">
+      <svg class="w-32 h-20" viewBox="0 0 100 60" fill="currentColor">
+        <path d="M10,40 Q15,20 40,30 Q60,0 80,30 Q95,25 90,40 Q100,55 80,50 Q65,70 50,50 Q35,60 20,50 Q5,55 10,40 Z"></path>
+      </svg>
+    </div>
+    <div class="star text-yellow-300" style="top: 15%; right: 25%;">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+      </svg>
+    </div>
+    <div class="star text-yellow-200" style="top: 40%; left: 20%;">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col items-center justify-center">
+        <!-- ✅ baby-blue ring by default -->
+        <div id="heroProfileRing" class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-blue-200 shadow-lg mb-8">
+          <img id="heroProfileImage" src="assets/profile.png" alt="Baby Aariv Mahadev photo" class="w-full h-full object-cover" />
+        </div>
+
+        <h1 id="heroTitle" class="title-font text-4xl md:text-5xl text-center text-purple-600 mb-4">Hi, I'm Aariv Mahadev!</h1>
+        <p id="heroSubtitle" class="text-xl text-center text-gray-600 max-w-lg">
+          Welcome to my little corner of the internet where my parents share my journey through babyhood!
+        </p>
+
+        <div class="mt-12 flex flex-wrap justify-center gap-4">
+          <div class="bg-pink-100 rounded-full px-6 py-3 flex items-center">
+            <svg class="w-5 h-5 text-pink-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+            </svg>
+            <span id="heroAgeChip" class="text-pink-700">4 months old</span>
+          </div>
+
+          <div class="bg-blue-100 rounded-full px-6 py-3 flex items-center">
+            <svg class="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z"></path>
+            </svg>
+            <span class="text-blue-700">Growing every day</span>
+          </div>
+
+          <div class="bg-green-100 rounded-full px-6 py-3 flex items-center">
+            <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-green-700">Full of smiles</span>
+          </div>
+        </div>
+
+        <!-- ✅ Arrow restored -->
+        <a href="#about" class="mt-16 animate-bounce" aria-label="Scroll to About">
+          <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / My Story So Far (UNCHANGED from your provided HTML) -->
+  <!-- ✅ Keep your existing About section exactly as-is below -->
+  <!-- ... keep your About section here ... -->
+   <section id="about" class="section py-16 bg-blue-50 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="title-font text-4xl text-center text-blue-600 mb-12">My Story So Far</h2>
+
+            <div class="max-w-4xl mx-auto relative">
+            <!-- Timeline line -->
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-200 ml-4 md:ml-0"></div>
+
+            <!-- Birth -->
+            <div class="timeline-item relative pl-12 md:pl-0 md:grid md:grid-cols-5 md:gap-8 mb-16">
+                <div class="md:col-span-2 md:text-right mb-4 md:mb-0">
+                <div class="bg-blue-200 inline-block px-4 py-2 rounded-lg text-blue-800 font-bold">
+                    The Big Day
+                </div>
+                </div>
+                <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-md">
+                <h3 class="title-font text-2xl text-blue-500 mb-2">My Grand Entrance</h3>
+                <p class="text-gray-700 mb-4">
+                    I was born on December 25, 2024, at Overlake Medical Hospital, weighing a perfect 3600 grams!
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <div class="bg-pink-100 px-3 py-1 rounded-full text-pink-700 text-sm">7 lbs 15 oz</div>
+                    <div class="bg-blue-100 px-3 py-1 rounded-full text-blue-700 text-sm">20.4 inches long</div>
+                    <div class="bg-purple-100 px-3 py-1 rounded-full text-purple-700 text-sm">12:45 AM</div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Name Meaning -->
+            <div class="timeline-item relative pl-12 md:pl-0 md:grid md:grid-cols-5 md:gap-8 mb-16">
+                <div class="md:col-span-2 md:text-right mb-4 md:mb-0">
+                <div class="bg-purple-200 inline-block px-4 py-2 rounded-lg text-purple-800 font-bold">
+                    My Identity
+                </div>
+                </div>
+                <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-md">
+                <h3 class="title-font text-2xl text-purple-500 mb-2">The Meaning of Aariv</h3>
+                <p class="text-gray-700 mb-4">
+                    My name "Aariv" means "peaceful" or "calm" in Sanskrit. My parents chose this name because they wanted me to bring peace and joy to everyone I meet!
+                </p>
+                <div class="flex items-center mt-4">
+                    <svg class="w-5 h-5 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <span class="text-gray-600 italic">"A peaceful soul with a bright future"</span>
+                </div>
+                </div>
+            </div>
+
+            <!-- Fun Facts -->
+            <div class="timeline-item relative pl-12 md:pl-0 md:grid md:grid-cols-5 md:gap-8">
+                <div class="md:col-span-2 md:text-right mb-4 md:mb-0">
+                <div class="bg-green-200 inline-block px-4 py-2 rounded-lg text-green-800 font-bold">
+                    Fun Facts
+                </div>
+                </div>
+                <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-md">
+                <h3 class="title-font text-2xl text-green-500 mb-2">Things About Me</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>I love to be sung to - especially lullabies!</span>
+                    </li>
+                    <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>My favorite toy is my plush elephant named picaboo</span>
+                    </li>
+                    <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>I have the cutest dimple on my right cheek when I smile</span>
+                    </li>
+                    <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>I already have a full head of dark, soft hair!</span>
+                    </li>
+                    <li class="flex items-start">
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>I'm already trying to roll over - watch out world!</span>
+                    </li>
+                </ul>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+  <!-- Milestones -->
+  <section id="milestones" class="section py-16 bg-green-50">
+    <div class="container mx-auto px-4">
+      <h2 class="title-font text-4xl text-center text-green-600 mb-12">My Milestones</h2>
+
+      <!-- ✅ app.js renders here -->
+      <div id="milestoneGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section py-16 bg-yellow-50">
+    <div class="container mx-auto px-4">
+      <h2 class="title-font text-4xl text-center text-yellow-600 mb-12">My Photo Gallery</h2>
+
+      <!-- Optional tabs (UI only) -->
+      <div class="max-w-4xl mx-auto mb-8">
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+          <button class="gallery-tab bg-yellow-500 text-white px-4 py-2 rounded-full font-bold">All Photos</button>
+          <button class="gallery-tab bg-white text-yellow-600 px-4 py-2 rounded-full font-bold hover:bg-yellow-100">Month 1</button>
+          <button class="gallery-tab bg-white text-yellow-600 px-4 py-2 rounded-full font-bold hover:bg-yellow-100">Month 2</button>
+          <button class="gallery-tab bg-white text-yellow-600 px-4 py-2 rounded-full font-bold hover:bg-yellow-100">Month 3</button>
+          <button class="gallery-tab bg-white text-yellow-600 px-4 py-2 rounded-full font-bold hover:bg-yellow-100">Month 4</button>
+          <button class="gallery-tab bg-white text-yellow-600 px-4 py-2 rounded-full font-bold hover:bg-yellow-100">Special Events</button>
+        </div>
+      </div>
+
+      <div id="galleryLocked" class="text-center text-gray-600 mb-6 hidden">🔒 Gallery is invite-only. Please login.</div>
+
+      <!-- ✅ app.js renders photos here -->
+      <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+
+      <!-- ✅ Load More only when more photos exist -->
+      <div id="galleryLoadMoreWrap" class="mt-10 text-center hidden">
+        <button id="galleryLoadMoreBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300">
+          Load More Photos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <section id="journal" class="section py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+      <h2 class="title-font text-4xl text-center text-red-600 mb-12">My Journal</h2>
+
+      <div id="journalLocked" class="text-center text-gray-600 mb-6 hidden">🔒 Journal is invite-only. Please login.</div>
+
+      <div id="journalList" class="max-w-4xl mx-auto"></div>
+    </div>
+  </section>
+
+  <!-- Guestbook (keep your existing markup as-is) -->
+  <!-- ... keep your Guestbook section here ... -->
+
+  <!-- Footer (keep your existing footer as-is) -->
+  <!-- ... keep your Footer here ... -->
+  <footer class="bg-purple-100 py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="title-font text-2xl text-purple-600">Aariv's Little World</h3>
+                    <p class="text-gray-600 mt-2">Following my journey one milestone at a time</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="bg-white p-2 rounded-full text-purple-500 hover:text-purple-700 hover:shadow-md transition-all">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/aariv.mahadev/" class="bg-white p-2 rounded-full text-pink-500 hover:text-pink-700 hover:shadow-md transition-all">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="bg-white p-2 rounded-full text-blue-500 hover:text-blue-700 hover:shadow-md transition-all">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-200 mt-8 pt-8 text-center">
+                <p class="text-gray-600">&copy; 2025 Aariv's Little World. Created with love by Mom & Dad.</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="#" class="text-purple-500 hover:text-purple-700">Privacy Policy</a>
+                    <a href="#" class="text-purple-500 hover:text-purple-700">Contact</a>
+                    <a href="#" class="text-purple-500 hover:text-purple-700">Share</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <!-- ✅ Supabase + your scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- You already have these in your repo -->
+  <script src="/js/config.js"></script>
+  <script src="/js/supabaseClient.js"></script>
+
+  <!-- ✅ UI-only JS (no milestones logic here) -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
+
+        e.preventDefault();
+        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+
+    // Gallery tabs UI only
+    const galleryTabs = document.querySelectorAll('.gallery-tab');
+    galleryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        galleryTabs.forEach(t => {
+          t.classList.remove('bg-yellow-500','text-white');
+          t.classList.add('bg-white','text-yellow-600');
+        });
+        tab.classList.remove('bg-white','text-yellow-600');
+        tab.classList.add('bg-yellow-500','text-white');
+      });
+    });
+
+    // Animations on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.milestone-card, .photo-frame, .timeline-item');
+      elements.forEach(el => {
+        const pos = el.getBoundingClientRect().top;
+        const screen = window.innerHeight / 1.2;
+        if (pos < screen) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    document.querySelectorAll('.milestone-card, .photo-frame, .timeline-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease-out';
+    });
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
+  
+  <!-- ✅ Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[9999] hidden">
+        <!-- backdrop -->
+        <div id="lightboxBackdrop" class="absolute inset-0 bg-black/80"></div>
+
+        <!-- content -->
+        <div class="relative w-full h-full flex items-center justify-center p-4">
+            <!-- close -->
+            <button id="lightboxClose"
+            class="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg"
+            aria-label="Close">
+            ✕
+            </button>
+
+            <!-- prev -->
+            <button id="lightboxPrev"
+            class="absolute left-3 md:left-6 bg-white/90 hover:bg-white text-gray-800 rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+            aria-label="Previous">
+            ‹
+            </button>
+
+            <!-- next -->
+            <button id="lightboxNext"
+            class="absolute right-3 md:right-6 bg-white/90 hover:bg-white text-gray-800 rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+            aria-label="Next">
+            ›
+            </button>
+
+            <!-- image -->
+            <figure class="relative max-w-5xl w-full">
+            <img id="lightboxImg" src="" alt=""
+                class="mx-auto max-h-[85vh] w-auto rounded-xl shadow-2xl bg-white object-contain" />
+            <figcaption id="lightboxCaption"
+                        class="mt-3 text-center text-white/90 text-sm"></figcaption>
+            </figure>
+        </div>
+    </div>
+    <!-- ✅ Only ONE data loader -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

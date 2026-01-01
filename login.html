@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aariv Login</title>
+</head>
+<body style="font-family: Arial; padding: 24px;">
+  <h2 style="margin:0 0 12px;">Login</h2>
+
+  <div style="display:flex; gap:8px; align-items:center;">
+    <input id="email" placeholder="Email" style="padding:8px; width:260px;" />
+    <button id="login" style="padding:8px 12px;">Send Magic Link</button>
+  </div>
+
+  <p id="status" style="margin-top:12px; color:#333;">Ready.</p>
+
+  <!-- Load Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Config must exist at /js/config.js -->
+  <script src="./js/config.js"></script>
+
+  <!-- Client must exist at /js/supabaseClient.js -->
+  <script src="./js/supabaseClient.js"></script>
+
+  <script>
+    // Basic smoke checks (these will show up in Console)
+    console.log("login.html loaded");
+    console.log("window.__AARIV_CONFIG__:", window.__AARIV_CONFIG__);
+    console.log("window.sb:", window.sb);
+
+    const statusEl = document.getElementById("status");
+
+    document.getElementById("login").addEventListener("click", async () => {
+      try {
+        const email = document.getElementById("email").value.trim();
+        if (!email) {
+          statusEl.textContent = "Enter an email first.";
+          return;
+        }
+
+        statusEl.textContent = "Sending magic link...";
+
+        const { error } = await window.sb.auth.signInWithOtp({
+          email,
+          options: { emailRedirectTo: window.location.origin + "/index.html" }
+        });
+
+        statusEl.textContent = error ? ("Error: " + error.message) : "✅ Magic link sent. Check inbox/spam.";
+        if (error) console.error(error);
+      } catch (e) {
+        statusEl.textContent = "JS error. Open Console (F12).";
+        console.error(e);
+      }
+    });
+  </script>
+</body>
+</html>
